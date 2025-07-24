@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Form Validation</title>
+</head>
+<body>
+  <form id="myForm">
+    <input type="text" id="username" placeholder="Enter username">
+    <button type="submit">Submit</button>
+    <p id="message" style="color:red;"></p>
+  </form>
+
+  <script>
+    document.getElementById("myForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const input = document.getElementById("username").value;
+      const message = document.getElementById("message");
+
+      if (input.length > 5) {
+        message.style.color = "green";
+        message.textContent = "Valid input!";
+      } else {
+        message.style.color = "red";
+        message.textContent = "Input must be more than 5 characters.";
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClassList Practice</title>
+  <style>
+    .active {
+      background-color: lightgreen;
+    }
+    .hidden {
+      display: none;
+    }
+    .dark-mode {
+      background-color: black;
+      color: white;
+    }
+    .highlight {
+      border: 2px solid orange;
+    }
+  </style>
+</head>
+<body>
+  <h2 id="myElement">Practice Class list methods</h2>
+
+  <button onclick="addClass()">Add 'active'</button>
+  <button onclick="removeClass()">Remove 'hidden'</button>
+  <button onclick="toggleClass()">Toggle 'dark-mode'</button>
+  <button onclick="checkClass()">Check if 'highlight' exists</button>
+  <button onclick="replaceClass()">Replace 'active' with 'highlight'</button>
+
+  <p id="result" style="margin-top: 10px; font-weight: bold;"></p>
+
+  <script>
+    const element = document.getElementById("myElement");
+    const result = document.getElementById("result");
+
+    function addClass() {
+      element.classList.add("active");
+      result.textContent = "'active' class added";
+    }
+
+    function removeClass() {
+      element.classList.remove("hidden");
+      result.textContent = "'hidden' class removed (if it existed)";
+    }
+
+    function toggleClass() {
+      element.classList.toggle("dark-mode");
+      result.textContent = "'dark-mode' class toggled";
+    }
+
+    function checkClass() {
+      const exists = element.classList.contains("highlight");
+      result.textContent = "'highlight' exists? " + exists;
+    }
+
+    function replaceClass() {
+      if (element.classList.contains("active")) {
+        element.classList.replace("active", "highlight");
+        result.textContent = "'active' replaced with 'highlight'";
+      } else {
+        result.textContent = "'active' class not found to replace";
+      }
+    }
+  </script>
+</body>
+</html pl

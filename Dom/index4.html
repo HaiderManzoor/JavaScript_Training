@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Event Listener Practice</title>
+  <style>
+    #hoverBox {
+      width: 200px;
+      height: 100px;
+      background-color: lightblue;
+      text-align: center;
+      line-height: 100px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Event Listener Practice</h2>
+  <button id="clickme">Click me</button>
+
+  <input type="text" id="inputfield" placeholder="Type Something....."/>
+
+  <div id="hoverBox">Hover Me</div>
+  <p>Press any key in this window</p>
+  <p id="keyOutput"></p>
+  <p id="output" style="margin-top: 20px; font-weight: bold;"></p>
+
+  <script>
+    const clickme = document.getElementById("clickme"); // lowercase 'c'
+    const inputfield = document.getElementById("inputfield");
+    const hoverBox = document.getElementById("hoverBox"); // case-sensitive
+    const keyOutput = document.getElementById("keyOutput");
+    const output = document.getElementById("output");
+
+    clickme.addEventListener("click", () => {
+      output.textContent = "Button clicked!";
+    });
+
+    inputfield.addEventListener("input", (e) => {
+      output.textContent = "You typed: " + e.target.value;
+    });
+
+    hoverBox.addEventListener("mouseover", () => {
+      hoverBox.style.backgroundColor = "orange";
+      output.textContent = "Mouse is over the box!";
+    });
+
+    hoverBox.addEventListener("mouseout", () => {
+      hoverBox.style.backgroundColor = "lightblue";
+      output.textContent = "Mouse left the box.";
+    });
+
+    document.addEventListener("keydown", (e) => {
+      keyOutput.textContent = "Key pressed: " + e.key;
+    });
+  </script>
+</body>
+</html>
