@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Post Search</title>
+</head>
+<body>
+
+  <h2>Search Posts by Title (Regex)</h2>
+  <input type="text" id="searchInput" placeholder="Enter regex]] to search title...">
+
+  <div id="postContainer"></div>
+
+  <script>
+    const postContainer = document.getElementById('postContainer');
+    const searchInput = document.getElementById('searchInput');
+    let allPosts = [];
+    async function fetchPosts() {
+      try {
+        const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+        const data = await res.json();
+        allPosts = data;
+        displayPosts(allPosts);
+      } catch (error) {
+        postContainer.innerText = "Failed to load posts.";
+      }
+    }
+    function displayPosts(posts) {
+      postContainer.innerHTML = "";
+      if (posts.length === 0) {
+        postContainer.innerText = "No posts match your search.";
+        return;
+      }
+
+      posts.forEach(post => {
+        const div = document.createElement('div');
+        const title = document.createElement('h3');
+        const body = document.createElement('p');
+
+        title.textContent = post.title;
+        body.textContent = post.body;
+
+        div.appendChild(title);
+        div.appendChild(body);
+        postContainer.appendChild(div);
+        postContainer.appendChild(document.createElement('hr'));
+      });
+    }
+    searchInput.addEventListener('input', () => {
+      const pattern = searchInput.value;
+      try {
+        const regex = new RegExp(pattern, 'i');
+        const filtered = allPosts.filter(post => regex.test(post.title));
+        displayPosts(filtered);
+      } catch {
+        postContainer.innerText = "Invalid regex pattern.";
+      }
+    });
+
+    fetchPosts();
+  </script>
+
+</body>
+</html>
